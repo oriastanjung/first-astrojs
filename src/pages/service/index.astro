@@ -1,0 +1,20 @@
+---
+import Card from "@/components/Card.astro";
+import Layout from "@/layouts/Layout.astro";
+import axios from "axios"
+let data : any = [];
+const fetchData = async () => {
+    const response = await axios.get("https://modern-tights-cod.cyclic.app/api/products")
+    data = await response.data.data
+    // console.log(response.data.results)
+}
+await fetchData()
+---
+
+<Layout title="Service Page">
+    <div class="grid grid-cols-4 container mx-auto px-6 gap-10">
+		{data.map((item : any, idx : number) => <Card  title={item.name} body={item.description} href={`/service/${item._id}`} />)}
+		
+	</div>
+
+</Layout>

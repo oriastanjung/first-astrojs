@@ -1,0 +1,32 @@
+---
+import type { GetStaticPaths } from "astro";
+import axios from "axios";
+
+import Layout from "@/layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const response = await axios.get("https://modern-tights-cod.cyclic.app/api/products");
+  const products = await response.data.data;
+
+
+   return products.map((product:any) => {return { params: { service: product._id } }});
+
+}
+
+const { service } = Astro.params;
+let data : any = {};
+const getData = async () => {
+    const res = await axios.get(`https://modern-tights-cod.cyclic.app/api/products/${service}`)
+    data = res.data.data
+    console.log(data)
+}
+await getData()
+---
+
+<Layout title="Service by service">
+  <main class="container mx-auto mt-10 px-8">
+    <h1 class="text-center font-bold text-xl">{data?.name}</h1>
+    <img src={data?.thumbnailUrl} alt="">
+    <p class="text-center my-16">{data?.description}</p>
+  </main>
+</Layout>

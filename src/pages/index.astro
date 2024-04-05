@@ -1,0 +1,32 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+type CardType = {
+	title : string
+	body : string
+	href: string
+
+}
+const DataCards : CardType[] = [
+	{body : "Description 1", title : "Card 1", href : "/service"},
+	{body : "Description 2", title : "Card 2", href : "/service"},
+	{body : "Description 3", title : "Card 3", href : "/service"},
+	{body : "Description 4", title : "Card 4", href : "/service"},
+	{body : "Description 4", title : "Card 4", href : "/service"},
+	{body : "Description 4", title : "Card 4", href : "/service"},
+	{body : "Description 4", title : "Card 4", href : "/service"},
+	{body : "Description 4", title : "Card 4", href : "/service"},
+	{body : "Description 4", title : "Card 4", href : "/service"},
+	{body : "Description 4", title : "Card 4", href : "/service"},
+]
+
+import Navbar from '@/components/layout/Navbar.astro';
+---
+
+<Layout title="Welcome to Astro.">
+	
+	<div class="grid grid-cols-4 container mx-auto px-6 gap-10">
+		{DataCards.map((item : CardType, idx : number) => <Card  title={item.title} body={item.body} href={item.href} />)}
+		
+	</div>
+</Layout>
